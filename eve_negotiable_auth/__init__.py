@@ -1,1 +1,1 @@
-from .auth import NegotiableAuth, AUTHPARSER
+from .negotiable_auth import NegotiableAuth, AUTH_PARSER
