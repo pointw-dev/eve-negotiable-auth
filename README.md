@@ -1,7 +1,7 @@
 # eve-negotiable-auth
 An auth module for Eve.  Allows for easy configuration and handling of multiple auth schemes - including schemes like Digest which require "negotiation".
 
-NegotiableAuth is an abstract base class.  It uses the authparser library, which parses the `Authorization:` header and dispatches to handlers.  As a result, there is only one function to override:
+`NegotiableAuth` is an abstract base class.  It uses the authparser library, which parses the `Authorization:` header and dispatches to handlers.  As a result, there is only one function to override:
 
 `process_claims(claims, allowed_roles, resource, method)`
 This is where you will use the passed to set up the Eve authorization context (e.g. calling `set_request_auth_value()`).
