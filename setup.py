@@ -7,7 +7,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='eve-negotiable-auth',
-    version='0.9.1',
+    version='0.9.2',
     description='Eve Negotiable authentication',
     long_description=long_description,
     long_description_content_type="text/markdown",
