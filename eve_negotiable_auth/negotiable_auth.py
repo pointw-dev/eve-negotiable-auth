@@ -48,8 +48,21 @@ class NegotiableAuth(BasicAuth):
         Indicate to the client that it needs to authorize via a 401, and details as to how.
         """
         challenge_header = AUTH_PARSER.get_challenge_header(request=request, single_line=True)
-        resp = Response(None, 401, challenge_header)
-        abort(401, description='Please provide proper credentials', response=resp)
+
+        response_body = {
+            '_status': 'ERR',
+            '_error': {
+                'code': 401,
+                'message': 'Please provide proper credentials'
+            }
+        }
+
+        resp = make_response(jsonify(response_body), 401)
+        resp.headers = {
+            **resp.headers,
+            **challenge_header
+        }
+        abort(resp)
 
     def process_claims(self, claims, allowed_roles, resource, method):
         raise NotImplementedError
