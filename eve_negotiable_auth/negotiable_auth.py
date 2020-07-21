@@ -1,5 +1,5 @@
 from eve.auth import BasicAuth
-from flask import request, abort, Response, g
+from flask import request, abort, make_response, jsonify, g
 from authparser import AuthParser
 
 AUTH_PARSER = AuthParser()
