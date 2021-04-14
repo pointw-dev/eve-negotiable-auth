@@ -2,6 +2,7 @@ from eve.auth import BasicAuth
 from flask import request, abort, make_response, jsonify, g
 from authparser import AuthParser
 
+
 AUTH_PARSER = AuthParser()
 
 
@@ -19,6 +20,14 @@ class NegotiableAuth(BasicAuth):
     def get_auth_claims(self):
         return g.get('negotiable_auth_claims', {})
 
+    def set_auth_issue(self, issue):
+        setattr(g, 'es_auth_issue', issue)
+
+    def get_auth_issue(self):
+        return g.get('es_auth_issue', {})
+
+
+
     def check_auth(self, username, password, allowed_roles, resource, method):
         pass
 
@@ -35,10 +44,15 @@ class NegotiableAuth(BasicAuth):
             if not claims:
                 return False
 
+            if '_issues' in claims:
+                self.set_auth_issue(claims['_issues'])
+                return False
+
             self.set_auth_claims(claims)
             authorized = self.process_claims(claims, allowed_roles, resource, method)
-        except Exception:
+        except Exception as ex:
             # TODO: log exception?
+            self.set_auth_issue({'user': f'{ex}. Error occurred while trying to process this user.'})
             authorized = False
 
         return authorized
@@ -54,8 +68,11 @@ class NegotiableAuth(BasicAuth):
             '_error': {
                 'code': 401,
                 'message': 'Please provide proper credentials'
-            }
+            },
         }
+        issue = self.get_auth_issue()
+        if issue:
+            response_body['_issues'] = [issue]
 
         resp = make_response(jsonify(response_body), 401)
         resp.headers = {

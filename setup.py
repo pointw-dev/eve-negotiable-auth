@@ -2,14 +2,12 @@
 
 from setuptools import setup, find_packages
 
-with open('README.md', 'r') as f:
-    long_description = f.read()
 
 setup(
     name='eve-negotiable-auth',
-    version='0.9.4',
+    version='0.9.5',
     description='Eve Negotiable authentication',
-    long_description=long_description,
+    long_description= open('README.md', 'r').read(),
     long_description_content_type="text/markdown",
     author='Michael Ottoson',
     author_email='michael@pointw.com',
@@ -19,14 +17,12 @@ setup(
     license='MIT',
     install_requires=['eve>=0.8.0', 'authparser>=1.0'],
     classifiers=[
-        'Programming Language :: Python',
+        'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python',
         'Operating System :: OS Independent',
-        'Environment :: Web Environment',
-        'Environment :: No Input/Output (Daemon)',
+        'Framework :: Flask',
         'Intended Audience :: Developers',
-        'Intended Audience :: Telecommunications Industry',
-        'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: HTTP Servers',
         'Topic :: Security',
     ]
