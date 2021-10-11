@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='eve-negotiable-auth',
-    version='0.9.5',
+    version='0.9.6',
     description='Eve Negotiable authentication',
     long_description= open('README.md', 'r').read(),
     long_description_content_type="text/markdown",
