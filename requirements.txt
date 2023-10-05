@@ -9,7 +9,7 @@ importlib-metadata==3.10.1
 keyring==23.0.1
 packaging==20.9
 pkginfo==1.7.0
-Pygments==2.8.1
+Pygments==2.15.0
 pyparsing==2.4.7
 pywin32-ctypes==0.2.0
 readme-renderer==29.0
